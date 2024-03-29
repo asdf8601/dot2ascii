@@ -2,24 +2,9 @@
 """
 Examples
 --------
->>> pipx run main.py help
-... text = '''
-... graph {
-...     rankdir=LR
-...     A [label="Christmas"]
-...     B [label="Go shopping"]
-...     C [label="Let me think"]
-...     D [label="Laptop"]
-...     E [label="iPhone"]
-...     F [label="Car"]
-...     A -> B [label="Get money"]
-...     B -> C
-...     C -> D [label="One"]
-...     C -> E [label="Two"]
-...     C -> F [label="Three"]
-... }
-... '''
-
+$ pipx run https://gist.githubusercontent.com/mmngreco/2d3bc321405b1991277fd6001060df0d/raw/dot2ascii.py help
+$ pipx run https://gist.githubusercontent.com/mmngreco/2d3bc321405b1991277fd6001060df0d/raw/dot2ascii.py "graph {a -- b -- c}"
+$ echo "graph {rankdir=LR; a -- b -- c }" | pipx run https://gist.githubusercontent.com/mmngreco/2d3bc321405b1991277fd6001060df0d/raw/dot2ascii.py
 """
 # /// script
 # requires-python = ">=3.10"
@@ -46,7 +31,7 @@ def dot_to_ascii(dot: str, fancy: bool = True):
     return response
 
 
-if __name__ == '__main__':
+def app():
     import sys
     if len(sys.argv) > 1:
         text = sys.argv[1]
@@ -57,3 +42,7 @@ if __name__ == '__main__':
         text = sys.stdin.read()
     ascii = dot_to_ascii(text)
     print(ascii)
+
+
+if __name__ == '__main__':
+    app()
